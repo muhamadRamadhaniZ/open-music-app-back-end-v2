@@ -58,6 +58,7 @@ class PlayListHandler {
     const { songId } = request.payload;
     const { id: credentialId } = request.auth.credentials;
     await this._service.verifyPlayListAccess(id, credentialId);
+    await this._service.cekSongFound(songId);
 
     const playlistSongId = await this._service.addPlayListSong({ id, songId, credentialId });
 

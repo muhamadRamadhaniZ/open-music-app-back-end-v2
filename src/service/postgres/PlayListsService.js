@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable camelcase */
 /* eslint linebreak-style: ["error", "windows"] */
 /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
@@ -69,6 +70,18 @@ class PlayListsService {
     await this.addPlayListSongActivity(playlist_id, song_id, owner, 'add');
 
     return result.rows[0].id;
+  }
+
+  async cekSongFound(id) {
+    const query = {
+      text: 'SELECT * FROM songs WHERE id = $1',
+      values: [id],
+    };
+
+    const result = await this._pool.query(query);
+    if (!result.rows.length) {
+      throw new NotFoundError('Song tidak ditemukan');
+    }
   }
 
   async getPlayListSongs(id) {

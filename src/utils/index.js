@@ -1,12 +1,15 @@
+/* eslint-disable camelcase */
 /* eslint linebreak-style: ["error", "windows"] */
 const mapDBToModel = ({
   id,
   name,
   year,
   songs,
+  cover_url,
 }) => ({
   id,
   name,
+  coverUrl: cover_url,
   year,
   songs,
 });
